@@ -1,9 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
 int global_quantity = 0;
+
 void knots_adj(int *pMass, int lines_counts) {
+    if (global_quantity / lines_counts != lines_counts) {
+        printf("incorrect adjacency matrix");
+        return;
+    }
     for (int i = 0; i < lines_counts; i++) {
         if (pMass[lines_counts*i + i] == 1) {
             printf("YES");
