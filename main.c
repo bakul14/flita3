@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
-#include <ctype.h>
+
+
 int global_quantity = 0;
 void knots_adj(int *pMass, int lines_counts) {
     for (int i = 0; i < lines_counts; i++) {
@@ -99,6 +99,7 @@ int main(int argc, char *argv[])
             return 1;
         }
     }
-    
+    printf("\n\r");
+    system("pause");
     return 0;
 }
