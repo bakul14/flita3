@@ -99,7 +99,5 @@ int main(int argc, char *argv[])
             return 1;
         }
     }
-    printf("\n\r");
-    system("pause");
     return 0;
 }
