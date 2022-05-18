@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 int global_quantity = 0;
 
@@ -64,10 +65,13 @@ int strCount(char *argv)
     while (!feof(file))
     {
         if (fgetc(file) == '\n')
-            lines_count++;
+            //fseek(file, lines_count, SEEK_SET);
+            //if ((fgetc(file)))
+             lines_count++;
     }
     fclose(file);
-    lines_count++;
+    //lines_count++;
+    printf("%d\n\r", lines_count);
     return lines_count;
 }
 
@@ -105,6 +109,7 @@ int *getfile(char *argv)
 
 int main(int argc, char *argv[])
 {
+    float start, stop;
     if (argc != 3)
     {
         printf("invalid arguments");
@@ -118,10 +123,14 @@ int main(int argc, char *argv[])
     switch (mode)
     {
     case 0:
+        start = clock();
         knots_adj(pMass, lines_count);
+        stop = clock();
         break;
     case 1:
+        start = clock();
         knots_inc(pMass, lines_count);
+        stop = clock();
         break;
     default:
     {
@@ -129,5 +138,7 @@ int main(int argc, char *argv[])
         return 1;
     }
     }
+
+    printf("\n\r%f ms", stop - start);
     return 0;
 }
