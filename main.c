@@ -3,28 +3,49 @@
 
 int global_quantity = 0;
 
-void knots_adj(int *pMass, int lines_counts) {
-    if (global_quantity / lines_counts != lines_counts) {
+void knots_adj(int *pMass, int lines_counts)
+{
+    _Bool flag = 1;
+    if (global_quantity != lines_counts * lines_counts)
+    {
         printf("incorrect adjacency matrix");
         return;
     }
-    for (int i = 0; i < lines_counts; i++) {
-        if (pMass[lines_counts*i + i] == 1) {
-            printf("YES");
-            return;
+    for (int i = 0; i < lines_counts; i++)
+    {
+        if (pMass[lines_counts * i + i] == 1)
+        {
+            if (flag)
+            {
+                flag = 0;
+                printf("KNOTS DETECTED:\n\r");
+            }
+            printf("i: %d\tj: %d\n\r", i, i);
         }
     }
-    printf("NO");
+    if (flag)
+        printf("NO KNOTS");
 }
 
-void knots_inc(int *pMass) {
-    for (int i = 0; i < global_quantity; i++) {
-        if (pMass[i] == 2) {
-            printf("YES");
-            return;
+void knots_inc(int *pMass, int lines_counts)
+{
+    _Bool flag = 1;
+    int ch_in_str = global_quantity / lines_counts;
+    for (int i = 0; i < global_quantity; i++)
+    {
+        if (pMass[i] == 2)
+        {
+            if (flag)
+            {
+                flag = 0;
+                printf("KNOTS DETECTED:\n\r");
+            }
+            printf("i: %d\tj: %d\n\r", i/ch_in_str, i%(i/ch_in_str*ch_in_str));
         }
     }
-    printf("NO");
+    if (flag)
+        printf("NO KNOTS");
+    printf("%d", ch_in_str);
 }
 
 void read_numbers(FILE *file, int quantity, int *numbers)
@@ -91,17 +112,23 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-    int mode = (int) (*argv[2] - '0');
+    int mode = (int)(*argv[2] - '0');
     int *pMass = getfile(argv[1]);
     int lines_count = strCount(argv[1]);
 
-    switch(mode) {
-        case 0: knots_adj(pMass, lines_count); break;
-        case 1: knots_inc(pMass); break;
-        default: {
-            printf("invalid arguments");
-            return 1;
-        }
+    switch (mode)
+    {
+    case 0:
+        knots_adj(pMass, lines_count);
+        break;
+    case 1:
+        knots_inc(pMass, lines_count);
+        break;
+    default:
+    {
+        printf("invalid arguments");
+        return 1;
+    }
     }
     return 0;
 }
