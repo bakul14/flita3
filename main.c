@@ -18,13 +18,13 @@ void knots_adj(int *pMass, int lines_counts)
             if (flag)
             {
                 flag = 0;
-                printf("KNOTS DETECTED:\n\r");
+                printf("LOOP DETECTED:\n\r");
             }
             printf("i: %d\tj: %d\n\r", i, i);
         }
     }
     if (flag)
-        printf("NO KNOTS");
+        printf("NO LOOP");
 }
 
 void knots_inc(int *pMass, int lines_counts)
@@ -38,14 +38,13 @@ void knots_inc(int *pMass, int lines_counts)
             if (flag)
             {
                 flag = 0;
-                printf("KNOTS DETECTED:\n\r");
+                printf("LOOP DETECTED:\n\r");
             }
             printf("i: %d\tj: %d\n\r", i/ch_in_str, i%(i/ch_in_str*ch_in_str));
         }
     }
     if (flag)
-        printf("NO KNOTS");
-    printf("%d", ch_in_str);
+        printf("NO LOOP");
 }
 
 void read_numbers(FILE *file, int quantity, int *numbers)
